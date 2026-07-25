@@ -144,3 +144,6 @@ Thumbs.db
 
 # Docker
 docker-compose.override.yml
+
+# Assessment generated files
+design_note.pdf
