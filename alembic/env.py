@@ -11,7 +11,7 @@ from app.core.config import settings
 from app.db.base import Base
 
 # Import models here so Alembic can detect metadata changes:
-# from app.models import user  # noqa: F401
+import app.models  # noqa: F401
 
 config = context.config
 
