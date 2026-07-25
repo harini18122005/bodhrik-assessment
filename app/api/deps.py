@@ -32,8 +32,8 @@ async def get_current_user(
         email: str | None = payload.get("sub")
         if email is None:
             raise credentials_exception
-    except JWTError:
-        raise credentials_exception
+    except JWTError as err:
+        raise credentials_exception from err
 
     # Query the user by email in the database
     result = await db.execute(select(User).where(User.email == email))

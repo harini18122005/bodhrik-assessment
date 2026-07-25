@@ -21,6 +21,9 @@ select = [
 ]
 ignore = []
 
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.params.Depends", "fastapi.Query", "fastapi.Path", "fastapi.Body", "fastapi.Header", "fastapi.Cookie", "fastapi.Form", "fastapi.File", "fastapi.Security", "app.api.deps.RoleChecker", "app.api.deps.check_session_access"]
+
 [tool.ruff.lint.isort]
 known-first-party = ["app"]
 

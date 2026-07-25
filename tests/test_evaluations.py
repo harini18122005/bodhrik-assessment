@@ -9,7 +9,10 @@ from app.main import app
 
 @pytest.mark.asyncio
 async def test_trigger_evaluation_success(client):
-    """Verify that an admin or teacher can trigger an evaluation, producing a DB record and enqueuing a job."""
+    """Verify that an admin or teacher can trigger an evaluation.
+
+    Produces a DB record and enqueues a job.
+    """
     mock_db = AsyncMock()
 
     mock_teacher = MagicMock()
@@ -25,7 +28,7 @@ async def test_trigger_evaluation_success(client):
     async def mock_refresh(instance):
         instance.id = 5
         instance.status = "Pending"
-        instance.created_at = datetime.datetime.now(datetime.timezone.utc)
+        instance.created_at = datetime.datetime.now(datetime.UTC)
 
     mock_db.refresh = mock_refresh
 

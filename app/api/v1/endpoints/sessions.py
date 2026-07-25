@@ -132,12 +132,15 @@ async def update_session(
     - Teachers cannot reassign the session's teacher.
     - Validate that updated teacher/student IDs exist and have valid roles.
     """
-    if current_user.role == "teacher":
-        if session_in.teacher_id is not None and session_in.teacher_id != current_user.id:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Teachers cannot reassign sessions to other teachers.",
-            )
+    if (
+        current_user.role == "teacher"
+        and session_in.teacher_id is not None
+        and session_in.teacher_id != current_user.id
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Teachers cannot reassign sessions to other teachers.",
+        )
 
     if session_in.teacher_id is not None:
         teacher_res = await db.execute(select(User).where(User.id == session_in.teacher_id))
